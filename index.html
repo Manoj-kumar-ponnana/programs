@@ -93,7 +93,7 @@
     button:active,#sbtn:active,#mbtn:active{
         background-color: rgb(128, 128, 128);;
     }
-    #res{
+    #res,#res1{
         font-size: 1.2rem;
     }
     #hint{
@@ -134,7 +134,7 @@
                 <option value="lm">L.C.M</option>
                 <option value="hf">H.C.F</option>
             </select><br><br><br>
-            <button onclick="check()">Check</button>
+            <button onclick="check1()">Check</button>
             <br><br>
             <p id="res1">&emsp14;</p>
         </div>
@@ -146,24 +146,22 @@
     function main_fun_1(){
         document.getElementById('single_value').style.display='block'
         document.getElementById('multiple_value').style.display='none'
+        document.getElementById('res1').style.display='none'
+        document.getElementById('res').style.display='block'
     }
     function main_fun_2(){
         document.getElementById('single_value').style.display='none'
         document.getElementById('multiple_value').style.display='block'
+        document.getElementById('res').style.display='none'
+        document.getElementById('res1').style.display='block'
     }
     function check(){
         x=document.getElementById('choice').value
-        x1=document.getElementById('choice1').value
-        console.log(x1)
         let n=document.getElementById('n1').value
-        let n1=document.getElementById('m1').value
-        let n2=document.getElementById('n2').value
         // console.log(typeof(n1,n2),n1,n2)
         n=parseInt(n)
-        n1=parseInt(n1)
-        n2=parseInt(n2)
         // console.log(typeof(n1,n2),n1,n2)
-        let y,y1
+        let y
         if(x=='perfect'){
             y=isPerfect(n)
         }
@@ -179,17 +177,27 @@
         else if(x=='fibanacci'){
             y=fibanacci_series(n)
         }
-        else if(x1=='lm'){
+        else{
+            y='Enter your valid choice'
+        }
+        document.getElementById('res').innerHTML=y
+    }
+    function check1(){
+        let x1=document.getElementById('choice1').value
+        let n1=document.getElementById('m1').value
+        let n2=document.getElementById('n2').value
+        n1=parseInt(n1)
+        n2=parseInt(n2)
+        let y1
+        if(x1=='lm'){
             y1=lcm_fun(n1,n2)
         }
         else if(x1=='hf'){
             y1=hcf_fun(n1,n2)
         }
         else{
-            y='Enter your valid choice'
             y1='Enter your valid choice'
         }
-        document.getElementById('res').innerHTML=y
         document.getElementById('res1').innerHTML=y1
     }
     function isPerfect(num){
