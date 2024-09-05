@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sample</title>
+</head>
+<style>
+    body{
+        background-color: rgba(128, 128, 128, 0.551);
+        font-family: sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+    }
+    #main_div{
+        height: 100%;
+        border:0.5px groove black;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+    #buttons{
+        position: absolute;
+        top:5rem;
+    }
+    #single_value{
+        text-align: left;
+        border:8px groove black;
+        padding: 3rem;
+        display: none;
+    }
+    #multiple_value{
+        text-align: left;
+        border:8px groove black;
+        padding: 3rem;
+        display: none;
+    }
+    input{
+        width: 15rem;
+        height: 2rem;
+        border: none;
+        border-bottom: 0.5px solid black;
+        background-color: inherit;
+        color: black;
+        font-size: 1.2rem;
+        font-family: inherit;
+    }
+    input::placeholder{
+        color: black;
+        font-size: 1.05rem;
+    }
+    input:focus,input:focus-visible{
+        outline: none;
+        box-shadow: none;
+    }
+    label{
+        font-size: 1.2rem;
+        font-family: inherit;
+    }
+    select{
+        background-color: inherit;
+        height: 2rem;
+        font-size: 1.05rem;
+        /* border: none; */
+        font-family: inherit;
+    }
+    select:focus{
+        outline: none;
+    }
+    button{
+        width: 5rem;
+        height: 2rem;
+        font-size: 1.05rem;
+        background-color: inherit;
+        font-family: inherit;
+    }
+    #sbtn{
+        width: 10rem;
+        height: 3rem;
+        font-size: 1.05rem;
+        background-color: inherit;
+        font-family: inherit;
+    }
+    #mbtn{
+        width: 10rem;
+        height: 3rem;
+        font-size: 1.05rem;
+        background-color: inherit;
+        font-family: inherit;
+    }
+    button:active,#sbtn:active,#mbtn:active{
+        background-color: rgb(128, 128, 128);;
+    }
+    #res{
+        font-size: 1.2rem;
+    }
+    #hint{
+        font-size: 0.8rem;
+        color: rgba(240, 248, 255, 0.693);
+    }
+</style>
+<body>
+    <div id="main_div">
+        <div id="buttons">
+            <button id="sbtn" onclick="main_fun_1()">single value</button>
+            <button id="mbtn" onclick="main_fun_2()">multiple values</button>
+            <p id="hint">hint : click on multiple values for lcm and hcf functions</p>
+        </div>
+        
+        <div id="single_value">
+            <input id="n1" type="number" placeholder="enter your frist number "> <br><br>
+            <!-- <input id="n2" type="number" placeholder="enter your second number "> <br><br> -->
+            <label for="choice">choose your choice :</label>
+            <select name="choice" id="choice">
+                <option value=" ">choose</option>
+                <option value="perfect">Perfect Number</option>
+                <option value="armstrong">Armstrong Number</option>
+                <option value="factors">Factors</option>
+                <option value="reverse">Reverse</option>
+                <option value="fibanacci">Fibanacci series</option>
+            </select><br><br><br>
+            <button onclick="check()">Check</button>
+            <br><br>
+            <p id="res">&emsp14;</p>
+        </div>
+        <div id="multiple_value">
+            <input id="m1" type="number" placeholder="enter your frist number "> <br><br>
+            <input id="n2" type="number" placeholder="enter your second number "> <br><br>
+            <label for="choice">choose your choice :</label>
+            <select name="choice" id="choice1">
+                <option value=" ">choose</option>
+                <option value="lm">L.C.M</option>
+                <option value="hf">H.C.F</option>
+            </select><br><br><br>
+            <button onclick="check()">Check</button>
+            <br><br>
+            <p id="res1">&emsp14;</p>
+        </div>
+    </div>
+    
+    
+</body>
+<script>
+    function main_fun_1(){
+        document.getElementById('single_value').style.display='block'
+        document.getElementById('multiple_value').style.display='none'
+    }
+    function main_fun_2(){
+        document.getElementById('single_value').style.display='none'
+        document.getElementById('multiple_value').style.display='block'
+    }
+    function check(){
+        x=document.getElementById('choice').value
+        x1=document.getElementById('choice1').value
+        console.log(x1)
+        let n=document.getElementById('n1').value
+        let n1=document.getElementById('m1').value
+        let n2=document.getElementById('n2').value
+        // console.log(typeof(n1,n2),n1,n2)
+        n=parseInt(n)
+        n1=parseInt(n1)
+        n2=parseInt(n2)
+        // console.log(typeof(n1,n2),n1,n2)
+        let y,y1
+        if(x=='perfect'){
+            y=isPerfect(n)
+        }
+        else if(x=='armstrong'){
+            y=armStrong(n)
+        }
+        else if(x=='factors'){
+            y=factors_fun(n)
+        }
+        else if(x=='reverse'){
+            y=reverse_num(n)
+        }
+        else if(x=='fibanacci'){
+            y=fibanacci_series(n)
+        }
+        else if(x1=='lm'){
+            y1=lcm_fun(n1,n2)
+        }
+        else if(x1=='hf'){
+            y1=hcf_fun(n1,n2)
+        }
+        else{
+            y='Enter your valid choice'
+            y1='Enter your valid choice'
+        }
+        document.getElementById('res').innerHTML=y
+        document.getElementById('res1').innerHTML=y1
+    }
+    function isPerfect(num){
+        let count=0
+        for(let i=1;i<num;i++){
+            if(num%i==0){
+                count+=i
+            }
+        }
+        if(count==num){
+            return "Perfect Number"
+        }
+        else return "Not a Perfect Number"
+    }
+    function factors_fun(num){
+        let count=[]
+        for(let i=1;i<=num;i++){
+            if(num%i==0){
+                count.push(i)
+            }
+        }
+        return count
+    }
+    function armStrong(num){
+        let snum=num.toString()
+        let len=num.toString().length
+        let s=0
+        // for(i=0;i<len;i++){
+        //     s+=(Number(snum[i]))**len
+        // }
+        let temp=num
+        while(temp!=0){
+            s+=(temp%10)**len
+            temp=parseInt(temp/10)  
+        }
+        if(s==num){
+            return "Armstrong Number"
+        }
+        else{
+            return "Not Armstrong Number"
+        }
+    }
+    function reverse_num(num){
+        let temp=num
+        let rev=0
+        while(temp!=0){
+            rev=rev*10
+            rev+=temp%10
+            temp=parseInt(temp/10)
+        }
+        // rev=num.toString().split("").reverse().join("")
+        return rev
+    }
+    function fibanacci_series(num){
+        let n1=0
+        let n2=1
+        let n=0
+        let collection=[n1,n2]
+        for(let i=1;i<=num-2;i++){
+            n=n1+n2
+            n1=n2
+            n2=n
+            collection.push(n)
+        }
+        return collection
+    }
+    function hcf_fun(num1,num2){
+        let f
+        console.log(num1,num2)
+        for(i=1;i<=num1&&i<=num2;i++){
+            if(num1%i==0 && num2%i==0){
+                f=i
+            }
+        }
+        // console.log(f)
+        return f
+    }
+    function lcm_fun(num1,num2){
+        let m=num1*num2
+        for(let i=num1*num2;i>=1;i--){
+            if(i%num1==0 && i%num2==0){
+                if(i<m){
+                    m=i
+                }
+            }
+        }
+        // console.log(m)
+        return m
+    }
+</script>
+</html>
