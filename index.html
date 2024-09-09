@@ -60,7 +60,7 @@
         font-family: inherit;
     }
     select{
-        background-color: inherit;
+        background-color: rgba(128, 128, 128, 0.551);
         height: 2rem;
         font-size: 1.05rem;
         /* border: none; */
@@ -100,6 +100,10 @@
         font-size: 0.8rem;
         color: rgba(240, 248, 255, 0.693);
     }
+    option{
+        background-color:transparent;
+    }
+    
 </style>
 <body>
     <div id="main_div">
@@ -121,6 +125,8 @@
                 <option value="factors">Factors</option>
                 <option value="reverse">Reverse</option>
                 <option value="fibanacci">Fibanacci series</option>
+                <option value="numtobin">Convert to Binary</option>
+                <option value="bintonum">Binary to Number</option>
             </select><br><br><br>
             <button onclick="check()">Check</button>
             <br><br>
@@ -180,6 +186,12 @@
         }
         else if(x=='prime'){
             y=isPrime(n)
+        }
+        else if(x=='numtobin'){
+            y=binary(n)
+        }
+        else if(x=='bintonum'){
+            y=decimal(n)
         }
         else{
             y='Enter your valid choice'
@@ -286,6 +298,32 @@
                 return "Prime Number"
             }
         }
+    }
+    function binary(num){
+        let temp=num
+        let res=[]
+        while(temp!=0){
+            rem=temp%2
+            temp=Math.floor(temp/2)
+            res.push(rem)
+        }
+        let res1=0
+        for(let i=res.length-1;i>=0;i--){
+            res1=res1*10+res[i]
+        }
+        return res1
+    }
+    function decimal(num){
+        let temp=num
+        let res=0
+        let pow=0
+        while(temp>0){
+            rem=temp%10
+            res+=rem*(2**pow)
+            pow++
+            temp=Math.floor(temp/10)
+        }
+        return res
     }
     function hcf_fun(num1,num2){
         let f
