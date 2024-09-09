@@ -116,6 +116,7 @@
             <select name="choice" id="choice">
                 <option value=" ">choose</option>
                 <option value="perfect">Perfect Number</option>
+                <option value="prime">Prime or Not</option>
                 <option value="armstrong">Armstrong Number</option>
                 <option value="factors">Factors</option>
                 <option value="reverse">Reverse</option>
@@ -176,6 +177,9 @@
         }
         else if(x=='fibanacci'){
             y=fibanacci_series(n)
+        }
+        else if(x=='prime'){
+            y=isPrime(n)
         }
         else{
             y='Enter your valid choice'
@@ -263,6 +267,25 @@
             collection.push(n)
         }
         return collection
+    }
+    function isPrime(num){
+        if(num<2){
+            return "Neither Prime nor Composite Number"
+        }
+        else{
+            let count=0
+            for(i=2;i<Math.floor(num*0.5);i++){
+                if(num%i==0){
+                    count++
+                }
+            }
+            if(count>0){
+                return "Composite Number"
+            }
+            else{
+                return "Prime Number"
+            }
+        }
     }
     function hcf_fun(num1,num2){
         let f
